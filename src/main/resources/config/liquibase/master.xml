@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="Init database" author="Szendi-Horváth József" runAlways="false" >
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists schemaName="public" tableName="author" />
+                <tableExists schemaName="public" tableName="book" />
+                <tableExists schemaName="public" tableName="genre" />
+                <tableExists schemaName="public" tableName="category" />
+            </not>
+        </preConditions>
+        <sqlFile path="changelog/init_database.sql" dbms="postgresql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="Add new columns" author="Szendi-Horváth József" runAlways="false" >
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists schemaName="public" tableName="publisher" />
+            </not>
+        </preConditions>
+        <sqlFile path="changelog/changelog_001.sql" dbms="postgresql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="Initial data" author="Szendi-Horváth József" runAlways="false" >
+        <sqlFile path="changelog/changelog_002.sql" dbms="postgresql" relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>
