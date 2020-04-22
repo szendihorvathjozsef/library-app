@@ -1,0 +1,6 @@
+{
+	"all": "Összes",
+	"record": "rekord",
+	"rowsPerPage": "Sor/oldal",
+	"displayedRows": "{{from}}-{{to}} / {{count}}"
+}

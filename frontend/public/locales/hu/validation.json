@@ -1,0 +1,10 @@
+{
+	"required": "Kérjük, töltse ki ezt a mezőt!",
+	"minLength": "Kérjük, {{length}} karakter hosszú vagy annál hosszabb szöveget adjon meg.",
+	"maxLength": "Kérjük, {{length}} karakter hosszú vagy annál rövidebb szöveget adjon meg.",
+	"min": "Kérjük, az érték legyen nagyobb vagy egyenlő, mint {{length}}.",
+	"max": "Kérjük, az érték legyen kisebb vagy egyenlő, mint {{length}}.",
+	"type": {
+		"number": "Kérjük, adjon meg egy számot."
+	}
+}

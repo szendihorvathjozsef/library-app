@@ -1,0 +1,50 @@
+{
+	"application": "React App",
+	"common": {
+		"home": "Kezdőlap",
+		"books": "Könyvek",
+		"authors": "Szerzők",
+		"categories": "Kategóriák",
+		"choose": "Kérem, válasszon"
+	},
+	"notification": {
+		"create": {
+			"success": "Sikeres {{subject}} létrehozás.",
+			"failure": "Sikertelen {{subject}} létrehozás."
+		},
+		"update": {
+			"success": "Sikeres {{subject}} módosítás.",
+			"failure": "Sikertelen {{subject}} módosítás."
+		}
+	},
+	"button": {
+		"modify": "Módosítás",
+		"add": "Hozzáadás",
+		"submit": "Küldés"
+	},
+	"book": {
+		"subject": "könyv",
+		"create": "Könyv hozzáadása",
+		"update": "Könyv adatainak módosítása",
+		"properties": {
+			"title": "Cím",
+			"description": "Leírás",
+			"pageCount": "Oldalak száma",
+			"publishDate": "Publikálás dátuma",
+			"category": "Kategória",
+			"authors": "Szerző(k)",
+			"publisher": "Kiadó",
+			"excerpt": "",
+			"translator": "Fordító",
+			"language": "Nyelv"
+		}
+	},
+	"category": {
+		"subject": "kategória",
+		"create": "Kategória létrehozása",
+		"update": "Kategória adatainak módosítása",
+		"properties": {
+			"name": "Név"
+		}
+	}
+}
