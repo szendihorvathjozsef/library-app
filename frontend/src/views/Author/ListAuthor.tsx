@@ -7,74 +7,66 @@ import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Edit";
-import DetailsIcon from "@material-ui/icons/Details";
 import { RootState } from "config/root-reducer";
-import { Book } from "shared/types";
+import { Author } from "shared/types";
 import Table from "components/Table";
 import { Link } from "components/Router";
-import { fetchBooks } from "shared/slices/bookSlice";
 import { RouteComponentProps } from "react-router-dom";
+import { fetchAuthors } from "shared/slices/authorSlice";
 
-interface ListBookProps extends RouteComponentProps {}
+interface ListAuthorProps extends RouteComponentProps {}
 
 const selector = createSelector(
-	(state: RootState) => state.book,
-	({ status, books }) => ({
+	(state: RootState) => state.author,
+	({ status, authors }) => ({
 		status,
-		books,
+		authors,
 	}),
 );
 
-const ListBook = ({ history }: ListBookProps) => {
+const ListAuthor = ({ history }: ListAuthorProps) => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
-	const { status, books } = useSelector(selector);
+	const { status, authors } = useSelector(selector);
 
-	const columns = React.useMemo<Column<Book>[]>(
+	const columns = React.useMemo<Column<Author>[]>(
 		() => [
 			{
-				Header: () => t("book.properties.title"),
-				accessor: "title",
+				Header: () => t("author.properties.lastName"),
+				accessor: "lastName",
 			},
 			{
-				Header: () => t("book.properties.publishDate"),
-				accessor: "publishDate",
-				Cell: ({ cell: { value } }) =>
-					value ? new Date(value).toLocaleString() : "No data",
+				Header: () => t("author.properties.firstName"),
+				accessor: "firstName",
 			},
 		],
 		[t],
 	);
 
 	React.useEffect(() => {
-		dispatch(fetchBooks());
+		dispatch(fetchAuthors());
 	}, [dispatch]);
 
 	return (
 		<>
 			<Typography variant="h3" color="initial">
-				{t("common.books")}
+				{t("common.authors")}
 			</Typography>
-			<Button variant="text" color="primary" component={Link} to="/books/add">
-				{t("book.create")}
+			<Button variant="text" color="primary" component={Link} to="/authors/add">
+				{t("author.create")}
 			</Button>
 			<Box display="flex" justifyContent="center">
 				<Table
 					isLoading={status === "pending" || status === "idle"}
-					title={t("common.books")}
-					data={books}
+					title={t("common.authors")}
+					data={authors}
 					columns={columns}
 					actions={[
 						{
 							icon: () => <EditIcon />,
 							tooltip: t("button.modify"),
-							onClick: (event, rowData) => history.push(`/books/${rowData.id}/modify`),
-						},
-						{
-							icon: () => <DetailsIcon />,
-							tooltip: t("button.details"),
 							onClick: (event, rowData) =>
-								history.push(`/books/${rowData.id}/details`),
+								history.push(`/authors/${rowData.id}/modify`),
 						},
 					]}
 				/>
@@ -83,4 +75,4 @@ const ListBook = ({ history }: ListBookProps) => {
 	);
 };
 
-export default ListBook;
+export default ListAuthor;

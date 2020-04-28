@@ -29,4 +29,8 @@
     <changeSet id="Initial data" author="Szendi-Horváth József" runAlways="false" >
         <sqlFile path="changelog/changelog_002.sql" dbms="postgresql" relativeToChangelogFile="true"/>
     </changeSet>
+
+    <changeSet id="Add image name to file" author="Szendi-Horváth József" runAlways="false" >
+        <sqlFile path="changelog/changelog_003.sql" dbms="postgresql" relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>

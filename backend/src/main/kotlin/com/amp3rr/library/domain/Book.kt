@@ -46,5 +46,7 @@ data class Book(
                 inverseJoinColumns = [JoinColumn(name = "author_id", referencedColumnName = "id")]
         )
         @JsonIgnoreProperties("books")
-        var authors: MutableSet<Author> = mutableSetOf<Author>()
+        var authors: MutableSet<Author> = mutableSetOf<Author>(),
+        @Column(name = "image_name")
+        var imageName: String?
 )

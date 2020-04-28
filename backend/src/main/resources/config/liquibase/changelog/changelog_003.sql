@@ -1,0 +1,1 @@
+ALTER TABLE public.book ADD COLUMN image_name VARCHAR(255);

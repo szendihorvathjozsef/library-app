@@ -25,14 +25,14 @@ const selector = createSelector(
 	(state: RootState) => state.author.authors,
 	(state: RootState) => state.category.categories,
 	(state: RootState) => state.publisher.publishers,
-	(authors, categories, publishers) => ({ authors, categories, publishers })
+	(authors, categories, publishers) => ({ authors, categories, publishers }),
 );
 
 const BookForm = ({
 	onSubmit,
 	text,
 	defaultValues,
-	isLoading = false
+	isLoading = false,
 }: BookFormProps) => {
 	const { t } = useTranslation();
 	const { register, handleSubmit, errors, control } = useForm<Book>();
@@ -59,8 +59,8 @@ const BookForm = ({
 							required: { value: true, message: t("validation:required") },
 							minLength: {
 								value: 4,
-								message: t("validation:minLength", { length: 4 })
-							}
+								message: t("validation:minLength", { length: 4 }),
+							},
 						})}
 						defaultValue={defaultValues?.title}
 						error={errors.title && true}
@@ -78,13 +78,13 @@ const BookForm = ({
 							required: { value: true, message: t("validation:required") },
 							pattern: {
 								value: /^-?\d+\.?\d*$/,
-								message: t("validation:type.number")
+								message: t("validation:type.number"),
 							},
 							validate: {
 								positive: value =>
 									parseInt(value, 10) > 1 ||
-									t("validation:min", { length: 0 }).toString()
-							}
+									t("validation:min", { length: 0 }).toString(),
+							},
 						})}
 						defaultValue={defaultValues?.pageCount}
 						error={errors.pageCount && true}
@@ -129,12 +129,12 @@ const BookForm = ({
 						inputRef={register({
 							minLength: {
 								value: 5,
-								message: t("validation:minLength", { length: 5 })
+								message: t("validation:minLength", { length: 5 }),
 							},
 							maxLength: {
 								value: 255,
-								message: t("validation:maxLength", { length: 255 })
-							}
+								message: t("validation:maxLength", { length: 255 }),
+							},
 						})}
 						defaultValue={defaultValues?.description}
 						error={errors.description && true}
@@ -173,6 +173,8 @@ const BookForm = ({
 								name="publisherId"
 								variant="outlined"
 								label={t("book.properties.publisher")}
+								error={errors.categoryId && true}
+								helperText={errors.categoryId?.message}
 								fullWidth
 								select
 							>
@@ -187,6 +189,20 @@ const BookForm = ({
 						control={control}
 						name="publisherId"
 						defaultValue={defaultValues?.publisherId ?? ""}
+						rules={{ required: { value: true, message: t("validation:required") } }}
+					/>
+				</Grid>
+				<Grid item xs={12}>
+					<TextField
+						id="image"
+						name="image"
+						type="file"
+						variant="outlined"
+						label={t("book.properties.imageName")}
+						inputRef={register}
+						InputLabelProps={{ shrink: true }}
+						fullWidth
+						defaultValue=""
 					/>
 				</Grid>
 				<Grid item xs={12}>
@@ -207,7 +223,7 @@ const BookForm = ({
 												.map(a => `${a.lastName} ${a.firstName}`) ?? [];
 
 										return selectedAuthors.join(", ");
-									}
+									},
 								}}
 								select
 							>

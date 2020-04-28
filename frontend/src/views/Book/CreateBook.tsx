@@ -7,8 +7,9 @@ import BookForm from "./components/BookForm";
 import { Book, SliceStates } from "shared/types";
 import Typography from "@material-ui/core/Typography";
 import { useTranslation } from "react-i18next";
-import { createBook } from "shared/network/book-api";
+import { createBook, uploadCoverImage } from "shared/network/book-api";
 import { useSnackbar } from "notistack";
+import BackArrow from "components/BackArrow";
 
 interface CreateBookProps {}
 
@@ -23,17 +24,30 @@ const CreateBook = (props: CreateBookProps) => {
 			await createBook({
 				...values,
 				category: { id: values.categoryId },
-				publisher: { id: values.publisherId }
+				publisher: { id: values.publisherId },
+				// @ts-ignore
+				authors: values.authors?.map(id => ({ id })),
+				image: null,
 			});
 			enqueueSnackbar(
 				t("notification.create.success", { subject: t("book.subject") }),
-				{ variant: "success" }
+				{ variant: "success" },
 			);
+
+			// @ts-ignore
+			if (values.image?.length > 0) {
+				const formData = new FormData();
+				// @ts-ignore
+				formData.append("file", values.image[0], values.image[0].name);
+				formData.append("bookName", values.title);
+				await uploadCoverImage(formData);
+			}
+
 			setStatus("success");
 		} catch (e) {
 			enqueueSnackbar(
 				t("notification.create.failure", { subject: t("book.subject") }),
-				{ variant: "error" }
+				{ variant: "error" },
 			);
 			setStatus("failure");
 		}
@@ -42,9 +56,7 @@ const CreateBook = (props: CreateBookProps) => {
 	return (
 		<Box display="flex" justifyContent="center">
 			<Paper style={{ padding: 16, width: 400 }}>
-				<Typography variant="h5" color="initial" gutterBottom>
-					{t("book.create")}
-				</Typography>
+				<BackArrow>{t("book.create")}</BackArrow>
 				<BookForm onSubmit={onSubmit} />
 			</Paper>
 		</Box>

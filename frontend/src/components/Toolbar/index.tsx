@@ -13,6 +13,7 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import MenuBookOutlinedIcon from "@material-ui/icons/MenuBookOutlined";
 import CategoryOutlinedIcon from "@material-ui/icons/CategoryOutlined";
+import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
 import DrawerItem from "./DrawerItem";
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
@@ -37,7 +38,7 @@ const Toolbar = () => {
 		if (event.key === "Enter" && inputRef.current?.value) {
 			event.preventDefault();
 			history.push(
-				`/search?keyword=${transformQueryParam(inputRef.current.value)}`
+				`/search?keyword=${transformQueryParam(inputRef.current.value)}`,
 			);
 		}
 	}
@@ -56,6 +57,11 @@ const Toolbar = () => {
 					to="/categories"
 					text={t("common.categories")}
 					icon={<CategoryOutlinedIcon />}
+				/>
+				<DrawerItem
+					to="/authors"
+					text={t("common.authors")}
+					icon={<PersonOutlineOutlinedIcon />}
 				/>
 			</List>
 		</React.Fragment>
@@ -94,7 +100,7 @@ const Toolbar = () => {
 				<Hidden smDown implementation="css">
 					<Drawer
 						classes={{
-							paper: classes.drawerPaper
+							paper: classes.drawerPaper,
 						}}
 						variant="permanent"
 						open
@@ -112,10 +118,10 @@ const Toolbar = () => {
 						onClose={toggleState}
 						onOpen={toggleState}
 						ModalProps={{
-							keepMounted: true
+							keepMounted: true,
 						}}
 						classes={{
-							paper: classes.drawerPaper
+							paper: classes.drawerPaper,
 						}}
 					>
 						<div className={classes.toolbar}>

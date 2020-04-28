@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
+import { DndProvider } from "react-dnd";
+import HTML5Backend from "react-dnd-html5-backend";
 import { SnackbarProvider } from "notistack";
 import store from "config/store";
 import theme from "config/theme";
@@ -23,9 +25,11 @@ const render = () => {
 						maxSnack={2}
 						action={key => <CloseSnackbar itemKey={key} />}
 					>
-						<React.Suspense fallback={<Fallback />}>
-							<App />
-						</React.Suspense>
+						<DndProvider backend={HTML5Backend}>
+							<React.Suspense fallback={<Fallback />}>
+								<App />
+							</React.Suspense>
+						</DndProvider>
 					</SnackbarProvider>
 				</ThemeProvider>
 			</BrowserRouter>

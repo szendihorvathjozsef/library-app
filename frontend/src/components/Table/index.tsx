@@ -20,8 +20,6 @@ import {
 	useTable,
 	Column
 } from "react-table";
-import { DndProvider } from "react-dnd";
-import HTML5Backend from "react-dnd-html5-backend";
 
 import { useImmer } from "shared/hooks/useImmer";
 import Cell from "./Cell";
@@ -128,7 +126,6 @@ const Table = <T extends object>({
 						<CircularProgress color="primary" size={48} />
 					</div>
 				)}
-				<DndProvider backend={HTML5Backend}>
 					<MuiTable {...getTableProps()}>
 						<TableHead>
 							{headerGroups.map(headerGroup => (
@@ -188,7 +185,6 @@ const Table = <T extends object>({
 							</TableRow>
 						</TableFooter>
 					</MuiTable>
-				</DndProvider>
 			</Paper>
 		</TableContainer>
 	);

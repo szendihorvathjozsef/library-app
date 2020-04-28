@@ -20,7 +20,8 @@
 	"button": {
 		"modify": "Módosítás",
 		"add": "Hozzáadás",
-		"submit": "Küldés"
+		"submit": "Küldés",
+		"details": "Részletek"
 	},
 	"book": {
 		"subject": "könyv",
@@ -36,7 +37,8 @@
 			"publisher": "Kiadó",
 			"excerpt": "",
 			"translator": "Fordító",
-			"language": "Nyelv"
+			"language": "Nyelv",
+			"imageName": "Borítókép"
 		}
 	},
 	"category": {
@@ -45,6 +47,18 @@
 		"update": "Kategória adatainak módosítása",
 		"properties": {
 			"name": "Név"
+		}
+	},
+	"author": {
+		"subject": "szerző",
+		"create": "Szerző hozzáadása",
+		"update": "Szerző adatainak módosítása",
+		"properties": {
+			"lastName": "Vezetéknév",
+			"firstName": "Keresztnév",
+			"birthday": "Születésnap",
+			"diedOn": "Meghalt",
+			"nationality": "Nemzetiség"
 		}
 	}
 }
