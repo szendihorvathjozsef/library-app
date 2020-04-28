@@ -1,14 +1,15 @@
 import React from "react";
+import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { SliceStates } from "shared/types";
 import Item from "./Item";
+import { getStatistics } from "shared/network/dashboard-api";
 
 interface Statistics {
 	books: number;
 	authors: number;
-	categories: string[];
 }
 
 const Home = () => {
@@ -16,18 +17,23 @@ const Home = () => {
 	const [statistics, setStatistics] = React.useState<Statistics | null>(null);
 
 	React.useEffect(() => {
-		setStatus("pending");
-		const timer = setTimeout(() => {
-			setStatistics({
-				books: 100,
-				authors: 20,
-				categories: "test, lorem, ipsum, dolor".split(",")
-			});
-			setStatus("success");
-		}, 3000);
+		let source = axios.CancelToken.source();
 
+		async function getData() {
+			setStatus("pending");
+			try {
+				const { data } = await getStatistics(source.token);
+				setStatistics(data);
+				setStatus("success");
+			} catch {
+				setStatistics(null);
+				setStatus("failure");
+			}
+		}
+
+		getData();
 		return () => {
-			clearTimeout(timer);
+			source.cancel();
 		};
 	}, []);
 
