@@ -8,7 +8,6 @@ import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import { Category } from "shared/types";
 import BackArrow from "components/BackArrow";
-import { fetchBook } from "shared/slices/bookSlice";
 import { RootState } from "config/root-reducer";
 import { updateCategory } from "shared/network/category-api";
 import CategoryForm from "./components/CategoryForm";
@@ -24,8 +23,8 @@ const selector = createSelector(
 	(state: RootState) => state.category,
 	({ category, status }) => ({
 		category,
-		status
-	})
+		status,
+	}),
 );
 
 const UpdateCategory = ({ match }: UpdateCategoryProps) => {
@@ -48,12 +47,12 @@ const UpdateCategory = ({ match }: UpdateCategoryProps) => {
 			await updateCategory({ ...category, ...data });
 			enqueueSnackbar(
 				t("notification.update.success", { subject: t("category.subject") }),
-				{ variant: "success" }
+				{ variant: "success" },
 			);
 		} catch (e) {
 			enqueueSnackbar(
 				t("notification.update.success", { subject: t("category.subject") }),
-				{ variant: "error" }
+				{ variant: "error" },
 			);
 		} finally {
 			setLoading(false);

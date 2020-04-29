@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Edit";
 import { RootState } from "config/root-reducer";
-import { Book, Category } from "shared/types";
+import { Category } from "shared/types";
 import Table from "components/Table";
 import { Link } from "components/Router";
 import { RouteComponentProps } from "react-router-dom";
@@ -20,8 +20,8 @@ const selector = createSelector(
 	(state: RootState) => state.category,
 	({ status, categories }) => ({
 		status,
-		categories
-	})
+		categories,
+	}),
 );
 
 const ListCategory = ({ history }: ListCategoryProps) => {
@@ -33,10 +33,10 @@ const ListCategory = ({ history }: ListCategoryProps) => {
 		() => [
 			{
 				Header: () => t("category.properties.name"),
-				accessor: "name"
-			}
+				accessor: "name",
+			},
 		],
-		[t]
+		[t],
 	);
 
 	React.useEffect(() => {
@@ -67,8 +67,8 @@ const ListCategory = ({ history }: ListCategoryProps) => {
 							icon: () => <EditIcon />,
 							tooltip: t("button.modify"),
 							onClick: (event, rowData) =>
-								history.push(`/categories/${rowData.id}/update`)
-						}
+								history.push(`/categories/${rowData.id}/update`),
+						},
 					]}
 				/>
 			</Box>

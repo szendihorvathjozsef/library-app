@@ -5,7 +5,6 @@ import Paper from "@material-ui/core/Paper";
 
 import BookForm from "./components/BookForm";
 import { Book, SliceStates } from "shared/types";
-import Typography from "@material-ui/core/Typography";
 import { useTranslation } from "react-i18next";
 import { createBook, uploadCoverImage } from "shared/network/book-api";
 import { useSnackbar } from "notistack";
@@ -57,7 +56,7 @@ const CreateBook = (props: CreateBookProps) => {
 		<Box display="flex" justifyContent="center">
 			<Paper style={{ padding: 16, width: 400 }}>
 				<BackArrow>{t("book.create")}</BackArrow>
-				<BookForm onSubmit={onSubmit} />
+				<BookForm onSubmit={onSubmit} isLoading={status === "pending"} />
 			</Paper>
 		</Box>
 	);

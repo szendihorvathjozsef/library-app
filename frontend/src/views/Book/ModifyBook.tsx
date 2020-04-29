@@ -107,7 +107,10 @@ const ModifyBook = ({ match }: ModifyBookProps) => {
 		<Box display="flex" justifyContent="center">
 			<Paper style={{ padding: 16, width: 400 }}>
 				<BackArrow>{t("book.update")}</BackArrow>
-				<img src={`${BACKEND_URL}/books/image/${book.imageName}`} />
+				<img
+					src={`${BACKEND_URL}/books/image/${book.imageName}`}
+					alt="Book cover"
+				/>
 				<BookForm
 					isLoading={status === "pending" || status === "idle" || loading}
 					onSubmit={onSubmit}

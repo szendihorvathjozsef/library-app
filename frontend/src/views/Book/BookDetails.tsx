@@ -59,7 +59,7 @@ const BookDetails = ({ match }: Props) => {
 		if (id) {
 			dispatch(fetchBook(parseInt(id, 10)));
 		}
-	}, [id]);
+	}, [id, dispatch]);
 
 	return (
 		<React.Fragment>
