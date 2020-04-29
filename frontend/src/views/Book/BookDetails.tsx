@@ -88,7 +88,7 @@ const BookDetails = ({ match }: Props) => {
 								<Typography variant="h6">{t("book.properties.authors")}:</Typography>
 								<ul>
 									{book.authors?.map(author => (
-										<li>
+										<li key={author.id}>
 											<Typography>
 												{author.lastName} {author.firstName}
 											</Typography>
